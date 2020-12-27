@@ -6,8 +6,10 @@ var logger = require("morgan");
 
 // Set up mongoose connection
 var mongoose = require("mongoose");
-var mongoDB =
+var dev_db_url =
   "mongodb+srv://dbUser:b940owA7rCv9Fiz4@cluster0.842li.mongodb.net/local_library?retryWrites=true&w=majority";
+
+var mongoDB = process.env.MONGODB_URI || dev_db_url;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
